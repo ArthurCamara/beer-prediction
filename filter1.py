@@ -53,9 +53,8 @@ def pickler():
   lineCount = 0
   for line in f:
     lineCount+=1
-    if lineCount%1000==0:
+    if lineCount%500000==0:
       print lineCount
-    print line
     if len(line) <= 2: #entre dois ratings existe uma linha vazia
       count = 0
       continue
@@ -132,7 +131,7 @@ def pickler():
       user[name]['text'].append(text)  #Documentos ligados a esse user
 
     count+=1   
-
+  print "printing data....."
   pickle.dump(user, puser)
   pickle.dump(beer, pbeer)
   return user, beer
