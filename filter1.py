@@ -129,4 +129,3 @@ def pickler():
   pickle.dump(user, puser)
   pickle.dump(beer, pbeer)
   return user, beer
-pickler()
