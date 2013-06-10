@@ -10,7 +10,7 @@ def pickler():
   aux = 0
   user = dict() #lista de dados de usuário
   beer = dict() #lista de dados de cerveja
-  f = open("../datasets/beeradvocate.txt", 'r')
+  f = open("beeradvocate.txt", 'r')
   puser = open('users.pkl', 'wb')
   pbeer = open('beers.pkl', 'wb')
   
