@@ -50,7 +50,11 @@ def pickler():
   #primeira coisa a se calcular: sparcity (quantos % dos usuários não deram rating em uma cerveja)
   # Insercão das linhas
   used = 0
+  lineCount = 0
   for line in f:
+    lineCount+=1
+    if lineCount%1000==0:
+      print lineCount
     print line
     if len(line) <= 2: #entre dois ratings existe uma linha vazia
       count = 0
@@ -132,3 +136,5 @@ def pickler():
   pickle.dump(user, puser)
   pickle.dump(beer, pbeer)
   return user, beer
+
+pickler()
