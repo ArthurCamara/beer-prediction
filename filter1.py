@@ -55,7 +55,7 @@ def pickler():
     if len(line) <= 2: #entre dois ratings existe uma linha vazia
       count = 0
       continue
-    if count == 0: #primeira linha. Nome da cerveja. Deve ser salva na próxima linha
+    if count == 0: #pritmeira linha. Nome da cerveja. Deve ser salva na próxima linha
       name = line.split(': ')[1]
       name = name.rstrip()
       count +=1
@@ -71,6 +71,7 @@ def pickler():
         beer[beerId]['name'] = name 
         beer[beerId]['numReviews'] = beer[beerId].get('numReviews', 0)+1
         beer[beerId]['users'] = []
+        beer[beerId]['text'] =[]
       count+=1
       continue
     if count ==2 and not used: #cervejaria
@@ -109,10 +110,11 @@ def pickler():
       overall = float(line.split(': ')[1].rstrip())
       beer[beerId]['overall'] = (float(beer[beerId].get('overall', 0)) + overall)/beer[beerId]['numReviews'] #media de rating da aparencia
     
-    if count == 11:#
+    if count == 11:#Adicionar usuário
       name = line.split(": ")[1].rstrip()
       numusers+=1
       if not name in user: # se for um novo usuário
+        user[name]['text'] = []
         user[name] = dict()
         numusers +=1
       user[name]['numRatings'] = user[name].get('numRatings',0) + 1
@@ -120,9 +122,10 @@ def pickler():
       beer[beerId]['users'].append(name)
     
 
-    if count == 12 :
+    if count == 12:#adicionar texto ao usuário e ao item 
       text = line.split(': ')[1]
-      beer[beerId]['text'] = (beer[beerId].get('text', '') + " " + text) #Todas as strings juntas
+      beer[beerId]['text'].append(text)#Documentos ligados a esse item
+      user[name]['text'].append(text)  #Documentos ligados a esse user
 
     count+=1   
 
