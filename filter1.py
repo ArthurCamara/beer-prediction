@@ -114,8 +114,8 @@ def pickler():
       name = line.split(": ")[1].rstrip()
       numusers+=1
       if not name in user: # se for um novo usuário
-        user[name]['text'] = []
         user[name] = dict()
+        user[name]['text'] = []
         numusers +=1
       user[name]['numRatings'] = user[name].get('numRatings',0) + 1
       user[name]['overall'] = (float(user[name].get('overall',0)) + overall)/user[name]['numRatings'] # atualizar a nota média do usuário
