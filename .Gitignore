@@ -1,3 +1,4 @@
-beers.pckl
-users.pckl
+beers.pkl
+users.pkl
 *.pyc
+beeradvocate.txt
