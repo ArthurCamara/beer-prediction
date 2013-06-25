@@ -15,7 +15,3 @@ def countUser():
         countDict[word] = countDict.get(word, 0) +1
         geralCount[word] = geralCount.get(word, 0) +1
     print countDict
-
-
-
-
