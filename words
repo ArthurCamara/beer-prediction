@@ -94,11 +94,11 @@ def main():
   pickle.dump(user, puser)
   pickle.dump(beer, pbeer)
   for u in user:
-    for i in user[u]['topCount']:
-      user[u]['topCount'] = user[u]['topCount']/user[u]['wordCount']
+    for i in range(100):
+      user[u]['topCount'][i] = user[u]['topCount'][i]/user[u]['wordCount']
   for b in beer:
-    for b in beer[b]['topCount']:
-      beer[b]['topCount'] = beer[b]['topCount']/beer[b]['wordCount']
+    for b in range(100):
+      beer[b]['topCount'][i] = beer[b]['topCount'][i]/beer[b]['wordCount']
 
 main()
 
