@@ -5,24 +5,26 @@ import pickle
 import re
 
 def main():
-  rgx = re.complile("(\w[\w']{3,})")
+  rgx = re.compile("(\w[\w']{3,})")
   topWordsF = open('top100.txt', 'r')
   puser = open('t100u', 'wb')
   pbeer = open('t100b', 'wb')
   top = []
   for line in topWordsF:
-    top.append(line.rstip())
+    top.append(line.rstrip())
   beer = dict()
+  user = dict()
   uid = 0
   #open the reviews file
   inputfile = open("beeradvocate.txt", 'r')
   used = 0;
   lineCount = 0
+  count = 0
   for line in inputfile:
     lineCount+=1
     if lineCount%500000 == 0:
       print lineCount
-    len(line)<=2:
+    if len(line)<=2:
       count = 0;
       continue
     if count == 0 or count ==2 or count == 4:
@@ -38,8 +40,9 @@ def main():
         beer[beerId]['numReviews'] = beer[beerId].get('numReviews', 0)+1
         beer[beerId]['wordCount'] = 0
         beer[beerId]['topCount'] = []
+        beer[beerId]['users'] = []
         for i in range(100):
-          beer[beerId]['topCount'][i]=0
+          beer[beerId]['topCount'].append(0)
 
     if count == 3 and not used:
       beer[beerId]['ABV'] = line.split(": ")[1].rstrip()
@@ -71,10 +74,11 @@ def main():
         user[name] = dict()
         user[name]['topCount'] = []
         for i in range(100):
-          user[name]['topCount'][i] = 0
+          user[name]['topCount'].append(0)
       user[name]['numRatings'] = user[name].get('numRatings',0) + 1
       user[name]['overall'] = (float(user[name].get('overall',0)) + overall)/user[name]['numRatings'] # atualizar a nota média do usuário
       beer[beerId]['users'].append(name)
+      user[name]['wordCount'] = 0
     if count == 12: #contar palavras no review
       text = rgx.findall(line.split(": ")[1])
       for i in text: #para cada palavra no texto
@@ -96,8 +100,6 @@ def main():
     for b in beer[b]['topCount']:
       beer[b]['topCount'] = beer[b]['topCount']/beer[b]['wordCount']
 
-
-
-
+main()
 
 
